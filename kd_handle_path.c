@@ -21,6 +21,7 @@ void kd_handle_path(char *textprint)
 		/* Confirm whether the command exists in the PATH */
 		char *kd_path = getenv("PATH");
 		char kd_path_copy[MAX_CMD_LEN];
+
 		strcpy(kd_path_copy, kd_path);
 
 		/* Tokenize the copy of kd_path, i.e kd_path_copy */
@@ -32,6 +33,7 @@ void kd_handle_path(char *textprint)
 			char *temp_buffer;
 
 			size_t temp_buffer_size = snprintf(NULL, 0, "%s/%s", kd_dir, kd_cmd_exec) + 1;
+
 			temp_buffer = malloc(temp_buffer_size);
 
 			snprintf(temp_buffer, temp_buffer_size, "%s/%s", kd_dir, kd_cmd_exec);
@@ -41,6 +43,7 @@ void kd_handle_path(char *textprint)
 			if (access(kd_cmd_exec, X_OK) == 0)
 			{
 				char *kd_args[2];
+
 				kd_args[0] = textprint;
 				kd_args[1] = NULL;
 				execve(kd_cmd_exec, kd_args, NULL);
@@ -52,7 +55,7 @@ void kd_handle_path(char *textprint)
 
 		/* Tokenize input into arguments */
 		/* Split the text by space */
-		
+
 		while (kd_token != NULL)
 		{
 			argv[argc] = kd_token;
